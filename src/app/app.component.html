@@ -5,6 +5,7 @@
 
         </mat-drawer>
 
+        @if(user){
         <div class="example-sidenav-content">
             <button type="button" mat-button (click)="drawer.toggle()" (click)="showMenu()">
                 @if(isMenuShown){
@@ -14,6 +15,7 @@
                 }
             </button>
         </div>
+        }
 
     </mat-drawer-container>
 </div>
