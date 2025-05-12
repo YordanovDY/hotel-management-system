@@ -3,6 +3,8 @@ import { RouterOutlet } from '@angular/router';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { User } from './types/User';
 import { LoginComponent } from "./components/login/login.component";
+import { DashboardComponent } from "./components/dashboard/dashboard.component";
+import { HeaderComponent } from "./components/core/header/header.component";
 
 @Component({
   selector: 'app-root',
@@ -10,7 +12,9 @@ import { LoginComponent } from "./components/login/login.component";
   imports: [
     RouterOutlet,
     MatSidenavModule,
-    LoginComponent
+    LoginComponent,
+    DashboardComponent,
+    HeaderComponent
 ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
