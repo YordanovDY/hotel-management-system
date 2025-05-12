@@ -1,9 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormatDatetimePipe } from '../../../pipes/format-datetime.pipe';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [],
+  imports: [FormatDatetimePipe],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
