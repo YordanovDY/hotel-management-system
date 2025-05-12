@@ -1,0 +1,11 @@
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    width: 600px;
+    align-items: center;
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    background-image: linear-gradient(135deg, #d6f5fa, #e7fef8);
+}

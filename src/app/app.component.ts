@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { User } from './types/User';
+import { LoginComponent } from "./components/login/login.component";
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,8 @@ import { User } from './types/User';
   imports: [
     RouterOutlet,
     MatSidenavModule,
-  ],
+    LoginComponent
+],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
