@@ -1,7 +1,7 @@
-<form>
+<form #formRef="ngForm" (ngSubmit)="submitHandler()">
     <h3>{{title}}</h3>
-    <app-text-field class="form-field" />
+    <app-text-field label="Email" name="email" required [(ngModel)]="model.email" />
 
-    <app-pass-field class="form-field" />
-    <button mat-raised-button>{{btnLabel}}</button>
+        <!-- <app-pass-field class="form-field" /> -->
+        <button mat-raised-button>{{btnLabel}}</button>
 </form>

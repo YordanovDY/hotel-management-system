@@ -1,4 +1,14 @@
 <mat-form-field class="form-field">
     <mat-label>{{label}}</mat-label>
-    <input matInput>
+    <input 
+    matInput 
+    type="text" 
+    [attr.name]="name" 
+    [value]="value" 
+    (input)="handleInput($event)" 
+    (blur)="onBlur()"
+    [disabled]="isDisabled"
+    [required]="isRequired"
+    >
+    <mat-error>Error</mat-error>
 </mat-form-field>

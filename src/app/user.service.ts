@@ -5,14 +5,7 @@ import { User } from './types/User';
   providedIn: 'root'
 })
 export class UserService {
-  user: User | null = {
-    id: '389hoihei',
-    email: 'asdaf',
-    firstName: 'sdfada',
-    lastName: 'sdfsgfsgf',
-    phoneNumber: '039822242',
-    roleId: 1
-  };
+  user: User | null = null;
 
   constructor() { }
 }

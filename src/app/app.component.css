@@ -5,6 +5,7 @@
     width: 100vw;
     height: calc(100vh - 194px);
     background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+    padding: 20px;
 }
 
 .example-sidenav-content button {
