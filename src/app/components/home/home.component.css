@@ -1,0 +1,10 @@
+.home-container{
+    display: flex;
+    justify-content: center;
+}
+
+.home-container button{
+    padding: 60px;
+    font-size: 44px;
+    font-weight: 600;
+}
