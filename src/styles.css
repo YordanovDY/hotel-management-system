@@ -28,3 +28,7 @@ body {
     letter-spacing: 1px;
     display: flex;
 }
+
+.page-header {
+    font-style: italic !important;
+}
