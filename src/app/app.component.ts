@@ -5,6 +5,7 @@ import { User } from './types/User';
 import { LoginComponent } from "./components/login/login.component";
 import { DashboardComponent } from "./components/dashboard/dashboard.component";
 import { HeaderComponent } from "./components/core/header/header.component";
+import { FooterComponent } from "./components/core/footer/footer.component";
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,8 @@ import { HeaderComponent } from "./components/core/header/header.component";
     MatSidenavModule,
     LoginComponent,
     DashboardComponent,
-    HeaderComponent
+    HeaderComponent,
+    FooterComponent
 ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'

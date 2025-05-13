@@ -1,0 +1,22 @@
+.footer-container {
+    width: 100%;
+    padding: 14px 24px;
+    background-color: #1a2b3c;
+    color: #ffffff;
+    text-align: center;
+}
+
+.social-media-container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.social-media-btn {
+    font-size: 26px;
+}
+
+.social-media-btn:hover {
+    color: #bad5dd;
+    cursor: pointer;
+}
