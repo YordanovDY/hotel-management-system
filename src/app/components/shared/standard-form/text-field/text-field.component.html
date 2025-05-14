@@ -1,4 +1,4 @@
-<mat-form-field class="form-field">
+<mat-form-field class="form-field" [color]="palette">
     <mat-label>{{label}}</mat-label>
     <input 
     matInput 
@@ -10,5 +10,11 @@
     [disabled]="isDisabled"
     [required]="isRequired"
     >
-    <mat-error>Error</mat-error>
+    @if(ngControl?.touched){
+        <div>
+            @if(ngControl?.hasError('required')){
+                <mat-error>{{label}} is required</mat-error>
+            }
+        </div>
+    }
 </mat-form-field>

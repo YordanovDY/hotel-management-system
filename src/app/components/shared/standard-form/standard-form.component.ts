@@ -2,7 +2,7 @@ import { Component, Input, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { TextFieldComponent } from "./text-field/text-field.component";
 import { PassFieldComponent } from "./pass-field/pass-field.component";
-import { FormsModule, NgForm } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, NgForm, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-standard-form',
@@ -11,7 +11,7 @@ import { FormsModule, NgForm } from '@angular/forms';
     MatButtonModule,
     TextFieldComponent,
     PassFieldComponent,
-    FormsModule
+    ReactiveFormsModule
   ],
   templateUrl: './standard-form.component.html',
   styleUrl: './standard-form.component.css'
@@ -19,14 +19,19 @@ import { FormsModule, NgForm } from '@angular/forms';
 export class StandardFormComponent {
   @Input('title') title: string = 'Form';
   @Input('btnLabel') btnLabel: string = 'Submit';
-  @ViewChild('formRef') form: NgForm | undefined;
 
-  // TODO: @Input('model') model: Model = {};
-  model = {
-    email: ''
-  };
+  formModel = new FormGroup({
+    email: new FormControl('', [Validators.required]) // TODO: Get from @Input
+  })
+
 
   submitHandler() {
-    console.log(this.form);
+    if(this.formModel.invalid){
+      console.error('Invalid input!');
+      return;
+    }
+
+    console.log(this.formModel.value);
   }
+
 }
