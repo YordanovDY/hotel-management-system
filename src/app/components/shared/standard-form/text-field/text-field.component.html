@@ -13,7 +13,15 @@
     @if(ngControl?.touched){
         <div>
             @if(ngControl?.hasError('required')){
-                <mat-error>{{label}} is required</mat-error>
+                <mat-error>{{label}} is required.</mat-error>
+            }
+
+            @if(ngControl?.hasError('minlength')){
+                <mat-error>{{label}} is too short.</mat-error>
+            }
+
+            @if(ngControl?.hasError('maxlength')){
+                <mat-error>{{label}} is too long.</mat-error>
             }
         </div>
     }

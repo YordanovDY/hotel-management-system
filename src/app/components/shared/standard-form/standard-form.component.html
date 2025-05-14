@@ -1,7 +1,17 @@
 <form [formGroup]="formModel" (ngSubmit)="submitHandler()">
     <h3>{{title}}</h3>
-    <app-text-field label="Email" name="email" formControlName="email" />
+    <!-- <app-text-field label="Email" name="email" formControlName="email" />
+    <app-pass-field class="form-field" /> -->
 
-        <!-- <app-pass-field class="form-field" /> -->
-        <button mat-raised-button>{{btnLabel}}</button>
+    @for (field of formTemplate; track $index) {
+        @if(field.type === 'text'){
+            <app-text-field [label]="field.label" [name]="field.name" [formControlName]="field.formControlName" />
+        }
+
+        @if(field.type === 'password'){
+            <app-pass-field [label]="field.label" [name]="field.name" [formControlName]="field.formControlName" />
+        }
+    }
+
+    <button mat-raised-button>{{btnLabel}}</button>
 </form>

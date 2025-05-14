@@ -33,7 +33,26 @@ export class TextFieldComponent extends FormField implements OnInit {
 
   get palette(): ThemePalette {
     const control = this.ngControl?.control;
-    return control?.touched && control?.invalid ? 'warn' : 'primary';
+
+    if (!control || !control.touched) {
+      return 'primary';
+    }
+
+    if (control.hasError('required')) {
+      return 'warn';
+    }
+
+    if (control.hasError('minlength')) {
+      return 'warn';
+    }
+
+    if (control.hasError('maxlength')) {
+      return 'warn';
+    }
+
+    // More errors here
+
+    return 'primary';
   }
 
   ngControl: NgControl | null = null;

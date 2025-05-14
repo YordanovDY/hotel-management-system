@@ -1,8 +1,33 @@
-<mat-form-field class="form-field">
+<mat-form-field class="form-field" [color]="palette">
     <mat-label>{{label}}</mat-label>
-    <input matInput [type]="hide() ? 'password' : 'text'" ngModel #passwordInput="ngModel" />
+    <input 
+    matInput 
+    [type]="hide() ? 'password' : 'text'" 
+    [attr.name]="name" 
+    [value]="value" 
+    (input)="handleInput($event)" 
+    (blur)="onBlur()"
+    [disabled]="isDisabled"
+    [required]="isRequired"
+    />
     <button mat-icon-button matSuffix (click)="clickEvent($event)" [attr.aria-label]="'Hide password'"
         [attr.aria-pressed]="hide()">
         <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
     </button>
+
+        @if(ngControl?.touched){
+        <div>
+            @if(ngControl?.hasError('required')){
+                <mat-error>{{label}} is required.</mat-error>
+            }
+
+            @if(ngControl?.hasError('minlength')){
+                <mat-error>{{label}} is too short.</mat-error>
+            }
+
+            @if(ngControl?.hasError('maxlength')){
+                <mat-error>{{label}} is too long.</mat-error>
+            }
+        </div>
+    }
 </mat-form-field>

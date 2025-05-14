@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { StandardFormComponent } from '../shared/standard-form/standard-form.component';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormFieldTemplate, PassField, TextField } from '../shared/standard-form/form-fields';
 
 @Component({
   selector: 'app-login',
@@ -9,5 +11,17 @@ import { StandardFormComponent } from '../shared/standard-form/standard-form.com
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
+  formGroup = new FormGroup({
+    email: new FormControl('', [Validators.required]),
+    password: new FormControl('', [
+      Validators.required,
+      Validators.minLength(6),
+      Validators.maxLength(24)
+    ])
+  })
 
+  formTemplate: FormFieldTemplate[] = [
+    new TextField('Email', 'email', 'email'),
+    new PassField('Password', 'password', 'password')
+  ]
 }
