@@ -50,6 +50,10 @@ export class TextFieldComponent extends FormField implements OnInit {
       return 'warn';
     }
 
+    if(control.hasError('emailValidator')){
+      return 'warn';
+    }
+
     // More errors here
 
     return 'primary';

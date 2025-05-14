@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { StandardFormComponent } from '../shared/standard-form/standard-form.component';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { FormFieldTemplate, PassField, TextField } from '../shared/standard-form/form-fields';
+import emailValidatorFn from '../../validators/email-validator';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ import { FormFieldTemplate, PassField, TextField } from '../shared/standard-form
 })
 export class LoginComponent {
   formGroup = new FormGroup({
-    email: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required, emailValidatorFn()]),
     password: new FormControl('', [
       Validators.required,
       Validators.minLength(6),

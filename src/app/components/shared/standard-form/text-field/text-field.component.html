@@ -23,6 +23,11 @@
             @if(ngControl?.hasError('maxlength')){
                 <mat-error>{{label}} is too long.</mat-error>
             }
+
+            @if(ngControl?.hasError('emailValidator')){
+                <mat-error>Invalid email.</mat-error>
+            }
+
         </div>
     }
 </mat-form-field>
