@@ -1,5 +1,5 @@
 <section class="home-container">
-    @if(user){
+    @if(isLoggedIn){
         <button mat-raised-button routerLink="/dashboard">LOG IN</button>
     }@else {
         <button mat-raised-button routerLink="/login">LOG IN</button>

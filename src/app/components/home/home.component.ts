@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { UserService } from '../../user.service';
-import { User } from '../../types/User';
+import { UserService } from '../user/user.service';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -11,11 +10,10 @@ import { RouterLink } from '@angular/router';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent implements OnInit {
-  user: User | null = null;
+export class HomeComponent {
 
-  ngOnInit(): void {
-    this.user = this.userService.user;
+  get isLoggedIn(): boolean{
+    return this.userService.isLogged;
   }
 
   constructor(private userService: UserService) { }

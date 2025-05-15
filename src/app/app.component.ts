@@ -1,13 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { LoginComponent } from "./components/login/login.component";
-import { DashboardComponent } from "./components/dashboard/dashboard.component";
 import { HeaderComponent } from "./components/core/header/header.component";
 import { FooterComponent } from "./components/core/footer/footer.component";
-import { HomeComponent } from "./components/home/home.component";
-import { UserService } from './user.service';
-import { User } from './types/User';
+import { UserService } from './components/user/user.service';
+import { AuthenticateComponent } from "./components/authenticate/authenticate.component";
+import { User } from './components/user/user.types'; 
 
 @Component({
   selector: 'app-root',
@@ -15,22 +13,23 @@ import { User } from './types/User';
   imports: [
     RouterOutlet,
     MatSidenavModule,
-    LoginComponent,
-    DashboardComponent,
     HeaderComponent,
     FooterComponent,
-    HomeComponent
+    AuthenticateComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'hotel-management-system';
   isMenuShown: boolean = false;
-  user: User | null = null;
 
-  ngOnInit(): void {
-    this.user = this.userService.user;
+  get isLoggedIn(): boolean {
+    return this.userService.isLogged;
+  }
+
+  get user(): User | null{
+    return this.userService.userData;
   }
 
   constructor(private userService: UserService) { }
