@@ -23,3 +23,48 @@
 .example-sidenav {
     padding: 20px;
 }
+
+.navigation {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.profile-details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-image: linear-gradient(120deg, #f1c5ff 0%, #abe3ff 100%);
+    padding: 20px;
+    border-radius: 20px;
+    font-size: 20px;
+    font-style: italic;
+    position: relative;
+}
+
+.role-label {
+    position: absolute;
+    top: -16px;
+    left: 50%;
+    font-weight: 600;
+    transform: translateX(-50%);
+    background-color: #faf9fd;
+    padding: 4px 30px;
+    border-radius: 20px;
+}
+
+.role-1 {
+    border: 1px solid #610000;
+    color: #610000;
+}
+
+.role-2 {
+    border: 1px solid navy;
+    color: navy;
+}
+
+.nav-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}

@@ -5,8 +5,16 @@
         <mat-drawer-container class="example-container" autosize>
             <mat-drawer #drawer class="example-sidenav" mode="side">
                 <h3>NAVIGATION</h3>
-                <p>{{user?.firstName}} {{user?.lastName}}</p>
-                <p>{{user?.email}}</p>
+                <section class="navigation">
+                    <div class="profile-details">
+                        <p class="role-label role-{{user?.roleId}}">{{user?.roleId | roleName}}</p>
+                        <p>{{user?.firstName}} {{user?.lastName}}</p>
+                        <p>{{user?.email}}</p>
+                    </div>
+                    <div class="nav-options">
+                        <button mat-raised-button>Logout</button>
+                    </div>
+                </section>
             </mat-drawer>
 
             @if(isLoggedIn){
@@ -25,5 +33,5 @@
         </mat-drawer-container>
         <app-footer />
     </div>
-    
+
 </app-authenticate>

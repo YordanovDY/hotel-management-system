@@ -6,6 +6,8 @@ import { FooterComponent } from "./components/core/footer/footer.component";
 import { UserService } from './components/user/user.service';
 import { AuthenticateComponent } from "./components/authenticate/authenticate.component";
 import { User } from './components/user/user.types'; 
+import { MatButtonModule } from '@angular/material/button';
+import { RoleNamePipe } from './pipes/role-name.pipe';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +17,9 @@ import { User } from './components/user/user.types';
     MatSidenavModule,
     HeaderComponent,
     FooterComponent,
-    AuthenticateComponent
+    AuthenticateComponent,
+    MatButtonModule,
+    RoleNamePipe,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
