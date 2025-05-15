@@ -12,14 +12,14 @@
                         <p>{{user?.email}}</p>
                     </div>
                     <div class="nav-options">
-                        <button mat-raised-button>Logout</button>
+                        <button mat-raised-button (click)="logoutHandler()">Logout</button>
                     </div>
                 </section>
             </mat-drawer>
 
             @if(isLoggedIn){
             <div class="example-sidenav-content">
-                <button type="button" mat-button (click)="drawer.toggle()" (click)="showMenu()">
+                <button type="button" mat-button (click)="showMenu()">
                     @if(isMenuShown){
                     <i class="fa-solid fa-angle-left"></i>
                     }@else {
