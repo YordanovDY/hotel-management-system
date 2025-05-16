@@ -25,6 +25,10 @@ export class StandardFormComponent {
   @Input('formTemplate') formTemplate!: FormFieldTemplate[];
   @Input('handler') handler!: StandardFormHandler;
 
+  get isInvalid(): boolean {
+    return this.formModel.invalid;
+  }
+
   submitHandler() {
     if (this.formModel.invalid) {
       console.error('Invalid input!');

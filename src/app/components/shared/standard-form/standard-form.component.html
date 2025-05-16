@@ -1,7 +1,5 @@
 <form [formGroup]="formModel" (ngSubmit)="submitHandler()">
     <h3>{{title}}</h3>
-    <!-- <app-text-field label="Email" name="email" formControlName="email" />
-    <app-pass-field class="form-field" /> -->
 
     @for (field of formTemplate; track $index) {
         @if(field.type === 'text'){
@@ -13,5 +11,5 @@
         }
     }
 
-    <button mat-raised-button>{{btnLabel}}</button>
+    <button [disabled]="isInvalid" mat-raised-button>{{btnLabel}}</button>
 </form>
