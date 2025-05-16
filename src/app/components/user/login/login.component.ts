@@ -40,9 +40,18 @@ export class LoginComponent {
     this.loginHandler = (credentials: LoginCredentials) => {
       this.isPending$$.next(true);
 
-      return this.userService.login(credentials).subscribe(() => {
-        this.isPending$$.next(false);
-        this.router.navigate(['/dashboard']);
+      return this.userService.login(credentials).subscribe({
+        next: () => {
+          this.isPending$$.next(false);
+          this.router.navigate(['/dashboard']);
+        },
+        error: () => {
+          // TODO: Error Handling
+          this.isPending$$.next(false);
+        },
+        complete: () => {
+          this.isPending$$.next(false);
+        }
       })
     }
   }

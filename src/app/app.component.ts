@@ -50,9 +50,19 @@ export class AppComponent {
       this.isLogoutPending$$.next(true);
       this.drawer.close();
 
-      return this.userService.logout().subscribe(() => {
-        this.isLogoutPending$$.next(false);
-        this.router.navigate(['/']);
+      return this.userService.logout().subscribe({
+        next: () => {
+          this.isLogoutPending$$.next(false);
+          this.router.navigate(['/']);
+        },
+        error: () => {
+          // TODO: Error Handling
+          this.isLogoutPending$$.next(false);
+        },
+
+        complete: () => {
+          this.isLogoutPending$$.next(false);
+        }
       })
     }
   }
