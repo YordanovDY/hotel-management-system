@@ -12,7 +12,11 @@
                         <p>{{user?.email}}</p>
                     </div>
                     <div class="nav-options">
-                        <button mat-raised-button (click)="logoutHandler()">Logout</button>
+                        <button 
+                            mat-raised-button [disabled]="isLogoutPending$ | async" 
+                            (click)="logoutHandler()"
+                         >Logout
+                        </button>
                     </div>
                 </section>
             </mat-drawer>

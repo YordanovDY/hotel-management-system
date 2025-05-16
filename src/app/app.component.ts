@@ -8,7 +8,8 @@ import { AuthenticateComponent } from "./components/authenticate/authenticate.co
 import { User } from './components/user/user.types';
 import { MatButtonModule } from '@angular/material/button';
 import { RoleNamePipe } from './pipes/role-name.pipe';
-import { Subscription } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -21,12 +22,16 @@ import { Subscription } from 'rxjs';
     AuthenticateComponent,
     MatButtonModule,
     RoleNamePipe,
+    AsyncPipe,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
   @ViewChild('drawer') drawer!: MatDrawer;
+
+  private isLogoutPending$$ = new BehaviorSubject<boolean>(false);
+  public isLogoutPending$ = this.isLogoutPending$$.asObservable();
 
   title = 'hotel-management-system';
   isMenuShown: boolean = false;
@@ -42,9 +47,11 @@ export class AppComponent {
   constructor(private userService: UserService, private router: Router) {
 
     this.logoutHandler = () => {
+      this.isLogoutPending$$.next(true);
       this.drawer.close();
 
       return this.userService.logout().subscribe(() => {
+        this.isLogoutPending$$.next(false);
         this.router.navigate(['/']);
       })
     }
