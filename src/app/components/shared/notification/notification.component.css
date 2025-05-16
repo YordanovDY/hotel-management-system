@@ -1,0 +1,43 @@
+.notification-container {
+    position: absolute;
+    bottom: 0;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.msg {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-radius: 20px;
+    padding: 14px 20px;
+}
+
+.error-msg {
+    background-color: #ffbdbd;
+    color: #770000;
+    border: 1px solid #770000;
+}
+
+.success-msg {
+    background-color: #cdffbd;
+    color: #007712;
+    border: 1px solid #007712;
+}
+
+.warning-msg {
+    background-color: #fff8bd;
+    color: #776700;
+    border: 1px solid #776700;
+}
+
+.message {
+    margin: 0;
+    padding: 0;
+}
+
+.icon {
+    font-size: 36px !important;
+}

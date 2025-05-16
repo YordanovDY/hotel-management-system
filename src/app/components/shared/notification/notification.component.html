@@ -1,0 +1,20 @@
+<div class="notification-container">
+    @for (item of messages; track $index) {
+    @if(item.type === 'error'){
+    <div class="msg error-msg">
+        <i class="fa-solid fa-circle-xmark icon"></i>
+        <p class="message">{{item.message}}</p>
+    </div>
+    } @else if (item.type === 'success') {
+    <div class="msg success-msg">
+        <i class="fa-solid fa-circle-check icon"></i>
+        <p class="message">{{item.message}}</p>
+    </div>
+    } @else if (item.type === 'warning') {
+    <div class="msg warning-msg">
+        <i class="fa-solid fa-circle-exclamation icon"></i>
+        <p class="message">{{item.message}}</p>
+    </div>
+    }
+    }
+</div>
