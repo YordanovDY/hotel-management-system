@@ -12,10 +12,7 @@
                         <p>{{user?.email}}</p>
                     </div>
                     <div class="nav-options">
-                        <button 
-                            mat-raised-button [disabled]="isLogoutPending$ | async" 
-                            (click)="logoutHandler()"
-                         >Logout
+                        <button mat-raised-button [disabled]="isLogoutPending$ | async" (click)="logoutHandler()">Logout
                         </button>
                     </div>
                 </section>
@@ -37,5 +34,5 @@
         </mat-drawer-container>
         <app-footer />
     </div>
-
+    <app-notification #notification />
 </app-authenticate>

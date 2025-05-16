@@ -10,6 +10,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { RoleNamePipe } from './pipes/role-name.pipe';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
+import { NotificationComponent } from './components/shared/notification/notification.component';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -23,12 +25,14 @@ import { AsyncPipe } from '@angular/common';
     MatButtonModule,
     RoleNamePipe,
     AsyncPipe,
+    NotificationComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
   @ViewChild('drawer') drawer!: MatDrawer;
+  @ViewChild('notification') notification !: NotificationComponent;
 
   private isLogoutPending$$ = new BehaviorSubject<boolean>(false);
   public isLogoutPending$ = this.isLogoutPending$$.asObservable();
@@ -55,8 +59,13 @@ export class AppComponent {
           this.isLogoutPending$$.next(false);
           this.router.navigate(['/']);
         },
-        error: () => {
-          // TODO: Error Handling
+        error: (err) => {
+          if (err instanceof HttpErrorResponse) {
+            this.notification.showNotification({ type: 'error', message: err.error.message });
+            return;
+          }
+
+          this.notification.showNotification({ type: 'error', message: 'Ops, something went wrong!' });
           this.isLogoutPending$$.next(false);
         },
 
