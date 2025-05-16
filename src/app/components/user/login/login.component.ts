@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { StandardFormComponent } from '../../shared/standard-form/standard-form.component';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { FormFieldTemplate, PassField, TextField } from '../../shared/standard-form/form-fields';
@@ -7,15 +7,22 @@ import { UserService } from '../user.service';
 import { LoginCredentials } from '../user.types';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { NotificationComponent } from '../../shared/notification/notification.component';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [StandardFormComponent],
+  imports: [
+    StandardFormComponent,
+    NotificationComponent,
+  ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
+  @ViewChild('notification') notification !: NotificationComponent;
+
   private isPending$$ = new BehaviorSubject<boolean>(false);
   public isPending$ = this.isPending$$.asObservable();
 
@@ -45,9 +52,15 @@ export class LoginComponent {
           this.isPending$$.next(false);
           this.router.navigate(['/dashboard']);
         },
-        error: () => {
-          // TODO: Error Handling
+        error: (err) => {
           this.isPending$$.next(false);
+          
+          if (err instanceof HttpErrorResponse) {
+            this.notification.showNotification({ type: 'error', message: err.error.message });
+            return;
+          }
+
+          this.notification.showNotification({ type: 'error', message: 'Ops, something went wrong!' });
         },
         complete: () => {
           this.isPending$$.next(false);
