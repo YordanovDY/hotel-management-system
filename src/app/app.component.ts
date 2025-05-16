@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { MatDrawer, MatSidenavModule } from '@angular/material/sidenav';
 import { HeaderComponent } from "./components/core/header/header.component";
 import { FooterComponent } from "./components/core/footer/footer.component";
@@ -26,6 +26,7 @@ import { HttpErrorResponse } from '@angular/common/http';
     RoleNamePipe,
     AsyncPipe,
     NotificationComponent,
+    RouterLink,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
@@ -42,6 +43,10 @@ export class AppComponent {
 
   get isLoggedIn(): boolean {
     return this.userService.isLogged;
+  }
+
+  get isAdmin(): boolean {
+    return this.userService.isAdmin;
   }
 
   get user(): User | null {

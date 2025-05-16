@@ -12,6 +12,10 @@
                         <p>{{user?.email}}</p>
                     </div>
                     <div class="nav-options">
+                        @if(isAdmin){
+                        <button mat-raised-button routerLink="/register">Create Profile</button>
+                        <button mat-raised-button>Event Log</button>
+                        }
                         <button mat-raised-button [disabled]="isLogoutPending$ | async" (click)="logoutHandler()">Logout
                         </button>
                     </div>

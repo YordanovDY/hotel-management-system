@@ -20,6 +20,10 @@ export class UserService {
     return this.user;
   }
 
+  get isAdmin(){
+    return this.user?.roleId === 1;
+  }
+
   constructor(private http: HttpClient) {
     this.user$.subscribe(user => {
       this.user = user;
