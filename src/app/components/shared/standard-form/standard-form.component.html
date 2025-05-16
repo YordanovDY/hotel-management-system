@@ -11,5 +11,5 @@
         }
     }
 
-    <button [disabled]="isInvalid" mat-raised-button>{{btnLabel}}</button>
+    <button [disabled]="isInvalid || (isPending | async)" mat-raised-button>{{btnLabel}}</button>
 </form>

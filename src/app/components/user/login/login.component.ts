@@ -4,8 +4,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { FormFieldTemplate, PassField, TextField } from '../../shared/standard-form/form-fields';
 import emailValidatorFn from '../../../validators/email-validator';
 import { UserService } from '../user.service';
-import { LoginCredentials, User } from '../user.types';
-import { Observable, Subscription } from 'rxjs';
+import { LoginCredentials } from '../user.types';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Component({
@@ -16,6 +16,9 @@ import { Router } from '@angular/router';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
+  private isPending$$ = new BehaviorSubject<boolean>(false);
+  public isPending$ = this.isPending$$.asObservable();
+
   formGroup = new FormGroup({
     email: new FormControl('', [Validators.required, emailValidatorFn()]),
     password: new FormControl('', [
@@ -35,8 +38,10 @@ export class LoginComponent {
 
   constructor(private userService: UserService, private router: Router) {
     this.loginHandler = (credentials: LoginCredentials) => {
-      
-      return this.userService.login(credentials).subscribe(() =>{
+      this.isPending$$.next(true);
+
+      return this.userService.login(credentials).subscribe(() => {
+        this.isPending$$.next(false);
         this.router.navigate(['/dashboard']);
       })
     }

@@ -5,6 +5,8 @@ import { PassFieldComponent } from "./pass-field/pass-field.component";
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { FormFieldTemplate } from './form-fields';
 import { StandardFormHandler } from './standard-form.types';
+import { Observable } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-standard-form',
@@ -13,7 +15,8 @@ import { StandardFormHandler } from './standard-form.types';
     MatButtonModule,
     TextFieldComponent,
     PassFieldComponent,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AsyncPipe,
   ],
   templateUrl: './standard-form.component.html',
   styleUrl: './standard-form.component.css'
@@ -24,6 +27,7 @@ export class StandardFormComponent {
   @Input('formGroup') formModel!: FormGroup;
   @Input('formTemplate') formTemplate!: FormFieldTemplate[];
   @Input('handler') handler!: StandardFormHandler;
+  @Input('isPending') isPending!: Observable<boolean>;
 
   get isInvalid(): boolean {
     return this.formModel.invalid;
