@@ -54,6 +54,10 @@ export class TextFieldComponent extends FormField implements OnInit {
       return 'warn';
     }
 
+    if(control.hasError('phoneValidator')){
+      return 'warn';
+    }
+
     // More errors here
 
     return 'primary';

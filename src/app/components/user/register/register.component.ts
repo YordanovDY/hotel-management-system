@@ -5,6 +5,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import emailValidatorFn from '../../../validators/email-validator';
 import { FormFieldTemplate, PassField, SelectField, TextField } from '../../shared/standard-form/form-fields';
 import { StandardFormComponent } from "../../shared/standard-form/standard-form.component";
+import phoneValidatorFn from '../../../validators/phone-validator';
 
 @Component({
   selector: 'app-register',
@@ -34,7 +35,7 @@ export class RegisterComponent {
 
     email: new FormControl('', [Validators.required, emailValidatorFn()]),
 
-    phoneNumber: new FormControl('', [Validators.required]), // TODO: phoneValidatorFn()
+    phoneNumber: new FormControl('', [Validators.required, phoneValidatorFn()]),
 
     password: new FormControl('', [
       Validators.required,

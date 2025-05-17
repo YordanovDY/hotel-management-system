@@ -28,6 +28,10 @@
                 <mat-error>Invalid email.</mat-error>
             }
 
+            @if(ngControl?.hasError('phoneValidator')){
+                <mat-error>Invalid phone number.</mat-error>
+            }
+
         </div>
     }
 </mat-form-field>
