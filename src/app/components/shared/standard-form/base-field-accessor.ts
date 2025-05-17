@@ -33,8 +33,7 @@ export abstract class FormField<T = any> implements ControlValueAccessor {
     }
 
     protected handleInput(event: Event): void {
-        const input = event.target as HTMLInputElement;
-        this.updateValue(input.value as any);
+        const target = event.target as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
+        this.updateValue(target.value as T);
     }
-
 }

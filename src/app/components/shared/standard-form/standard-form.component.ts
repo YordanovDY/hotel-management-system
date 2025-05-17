@@ -7,6 +7,7 @@ import { FormFieldTemplate } from './form-fields';
 import { StandardFormHandler } from './standard-form.types';
 import { Observable } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
+import { SelectFieldComponent } from './select-field/select-field.component';
 
 @Component({
   selector: 'app-standard-form',
@@ -16,6 +17,7 @@ import { AsyncPipe } from '@angular/common';
     TextFieldComponent,
     PassFieldComponent,
     ReactiveFormsModule,
+    SelectFieldComponent,
     AsyncPipe,
   ],
   templateUrl: './standard-form.component.html',

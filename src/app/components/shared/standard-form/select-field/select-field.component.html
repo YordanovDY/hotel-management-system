@@ -1,0 +1,21 @@
+<mat-form-field [color]="palette">
+    <mat-label>{{label}}</mat-label>
+    <mat-select 
+    [attr.name]="name" 
+    (selectionChange)="updateValue($event.value)" 
+    (blur)="onBlur()"
+    [disabled]="isDisabled"
+    [required]="isRequired">
+
+        @for (option of options; track $index) {
+        <mat-option [value]="option.value">{{option.label}}</mat-option>
+        }
+    </mat-select>
+    @if(ngControl?.touched){
+    <div>
+        @if(ngControl?.hasError('required')){
+        <mat-error>{{label}} is required.</mat-error>
+        }
+    </div>
+    }
+</mat-form-field>

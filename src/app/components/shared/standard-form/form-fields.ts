@@ -1,13 +1,20 @@
+import { SelectOptions } from "./select-field/select-field.types";
+
 abstract class BaseField {
     label: string;
     name: string;
     formControlName: string;
+    options: SelectOptions[] = [];
     abstract type: string;
 
-    constructor(label: string, name: string, formControlName: string) {
+    constructor(label: string, name: string, formControlName: string, options?: SelectOptions[]) {
         this.label = label;
         this.name = name;
         this.formControlName = formControlName;
+
+        if (options) {
+            this.options = options;
+        }
     }
 }
 
@@ -27,4 +34,12 @@ export class PassField extends BaseField {
     }
 }
 
-export type FormFieldTemplate = TextField | PassField;
+export class SelectField extends BaseField {
+    type = 'select';
+
+    constructor(label: string, name: string, formControlName: string, options: SelectOptions[]) {
+        super(label, name, formControlName, options);
+    }
+}
+
+export type FormFieldTemplate = TextField | PassField | SelectField;

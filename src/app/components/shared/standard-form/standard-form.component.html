@@ -9,6 +9,10 @@
         @if(field.type === 'password'){
             <app-pass-field [label]="field.label" [name]="field.name" [formControlName]="field.formControlName" />
         }
+
+        @if(field.type === 'select'){
+            <app-select-field  [label]="field.label" [name]="field.name" [formControlName]="field.formControlName" [options]="field.options"/>
+        }
     }
 
     <button [disabled]="isInvalid || (isPending | async)" mat-raised-button>{{btnLabel}}</button>
