@@ -57,8 +57,8 @@ export class RegisterComponent {
     new TextField('Last Name', 'lastName', 'lastName'),
     new TextField('Email', 'email', 'email'),
     new TextField('Phone Number', 'phoneNumber', 'phoneNumber'),
-    new PassField('Password', 'repassword', 'repassword'),
-    new PassField('Repeat Password', 'password', 'password'),
+    new PassField('Password', 'password', 'password'),
+    new PassField('Repeat Password', 'repassword', 'repassword'),
     new SelectField('Role', 'role', 'role', [
       { label: '--- Select Role ---', value: '' },
       { label: 'Admin', value: '1' },
