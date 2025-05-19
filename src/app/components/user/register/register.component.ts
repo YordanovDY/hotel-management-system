@@ -72,35 +72,39 @@ export class RegisterComponent {
   registerHandler!: (credentials: RegisterCredentials) => Subscription | void;
 
 
-    constructor(private userService: UserService) {
-      this.registerHandler = (credentials: RegisterCredentials) => {
-        if(credentials.password !== credentials.repassword){
-          this.notification.showNotification({type: 'error', message: 'Passwords mismatched!'});
-          return;
-        }
-
-        this.isPending$$.next(true);
-  
-        return this.userService.register(credentials).subscribe({
-          next: () => {
-            this.notification.showNotification({type: 'success', message:`${credentials.firstName} ${credentials.lastName} is registered in the system.`});
-            this.formGroup.reset();
-            this.isPending$$.next(false);
-          },
-          error: (err) => {
-            this.isPending$$.next(false);
-            
-            if (err instanceof HttpErrorResponse) {
-              this.notification.showNotification({ type: 'error', message: err.error.message });
-              return;
-            }
-  
-            this.notification.showNotification({ type: 'error', message: 'Ops, something went wrong!' });
-          },
-          complete: () => {
-            this.isPending$$.next(false);
-          }
-        })
+  constructor(private userService: UserService) {
+    this.registerHandler = (credentials: RegisterCredentials) => {
+      if (credentials.password !== credentials.repassword) {
+        this.notification.showNotification({ type: 'error', message: 'Passwords mismatched!' });
+        this.formGroup.controls.password.reset();
+        this.formGroup.controls.repassword.reset();
+        return;
       }
+
+      this.isPending$$.next(true);
+
+      return this.userService.register(credentials).subscribe({
+        next: () => {
+          this.notification.showNotification({ type: 'success', message: `${credentials.firstName} ${credentials.lastName} is registered in the system.` });
+          this.formGroup.reset();
+          this.isPending$$.next(false);
+        },
+        error: (err) => {
+          this.isPending$$.next(false);
+          this.formGroup.controls.password.reset();
+          this.formGroup.controls.repassword.reset();
+
+          if (err instanceof HttpErrorResponse) {
+            this.notification.showNotification({ type: 'error', message: err.error.message });
+            return;
+          }
+
+          this.notification.showNotification({ type: 'error', message: 'Ops, something went wrong!' });
+        },
+        complete: () => {
+          this.isPending$$.next(false);
+        }
+      })
     }
+  }
 }

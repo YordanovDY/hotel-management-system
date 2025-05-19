@@ -54,6 +54,7 @@ export class LoginComponent {
         },
         error: (err) => {
           this.isPending$$.next(false);
+          this.formGroup.controls.password.reset();
           
           if (err instanceof HttpErrorResponse) {
             this.notification.showNotification({ type: 'error', message: err.error.message });
