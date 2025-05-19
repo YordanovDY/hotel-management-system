@@ -3,15 +3,16 @@ import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/user/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AuthGuard } from './guards/auth.guard';
+import { DoubleLoginGuard } from './guards/double-login.guard';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
-    { path: 'login', component: LoginComponent },
+    { path: 'login', component: LoginComponent, canActivate: [DoubleLoginGuard] },
     {
         path: 'dashboard', canActivate: [AuthGuard],
         children: [
             { path: '', component: DashboardComponent },
-            
+
             {
                 path: 'register', loadComponent: () => import('./components/user/register/register.component')
                     .then(c => c.RegisterComponent),
