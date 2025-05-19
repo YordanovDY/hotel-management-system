@@ -12,6 +12,7 @@
                         <p>{{user?.email}}</p>
                     </div>
                     <div class="nav-options">
+                        <button mat-raised-button routerLink="/dashboard">Dashboard</button>
                         @if(isAdmin){
                         <button mat-raised-button routerLink="/register">Create Profile</button>
                         <button mat-raised-button>Event Log</button>
