@@ -6,11 +6,14 @@ import emailValidatorFn from '../../../validators/email-validator';
 import { FormFieldTemplate, PassField, SelectField, TextField } from '../../shared/standard-form/form-fields';
 import { StandardFormComponent } from "../../shared/standard-form/standard-form.component";
 import phoneValidatorFn from '../../../validators/phone-validator';
+import { RegisterCredentials } from '../user.types';
+import { UserService } from '../user.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [StandardFormComponent],
+  imports: [StandardFormComponent, NotificationComponent],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
@@ -66,5 +69,38 @@ export class RegisterComponent {
     ])
   ]
 
-  // registerHandler!: (credentials: RegisterCredentials) => Subscription;
+  registerHandler!: (credentials: RegisterCredentials) => Subscription | void;
+
+
+    constructor(private userService: UserService) {
+      this.registerHandler = (credentials: RegisterCredentials) => {
+        if(credentials.password !== credentials.repassword){
+          this.notification.showNotification({type: 'error', message: 'Passwords mismatched!'});
+          return;
+        }
+
+        this.isPending$$.next(true);
+  
+        return this.userService.register(credentials).subscribe({
+          next: () => {
+            this.notification.showNotification({type: 'success', message:`${credentials.firstName} ${credentials.lastName} is registered in the system.`});
+            this.formGroup.reset();
+            this.isPending$$.next(false);
+          },
+          error: (err) => {
+            this.isPending$$.next(false);
+            
+            if (err instanceof HttpErrorResponse) {
+              this.notification.showNotification({ type: 'error', message: err.error.message });
+              return;
+            }
+  
+            this.notification.showNotification({ type: 'error', message: 'Ops, something went wrong!' });
+          },
+          complete: () => {
+            this.isPending$$.next(false);
+          }
+        })
+      }
+    }
 }

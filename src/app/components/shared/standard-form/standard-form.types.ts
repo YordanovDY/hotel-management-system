@@ -1,4 +1,6 @@
 import { Subscription } from "rxjs";
-import { LoginCredentials } from "../../user/user.types";
+import { LoginCredentials, RegisterCredentials } from "../../user/user.types";
 
-export type StandardFormHandler = (credentials: LoginCredentials) => Subscription;
+export type StandardFormHandler =
+    ((credentials: LoginCredentials) => Subscription) |
+    ((credentials: RegisterCredentials) => Subscription | void);

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { LoginCredentials, User } from './user.types';
+import { LoginCredentials, RegisterCredentials, User } from './user.types';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, tap } from 'rxjs';
 
@@ -20,7 +20,7 @@ export class UserService {
     return this.user;
   }
 
-  get isAdmin(){
+  get isAdmin() {
     return this.user?.roleId === 1;
   }
 
@@ -46,5 +46,13 @@ export class UserService {
     return this.http.get<User>('/api/auth/user').pipe(tap(
       user => this.user$$.next(user)
     ))
+  }
+
+  register(credentials: RegisterCredentials) {
+    const registerData = {
+      ...credentials,
+      roleId: Number(credentials.role)
+    }
+    return this.http.post<User>('/api/auth/register', registerData);
   }
 }
