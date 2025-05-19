@@ -43,7 +43,7 @@ export class UserService {
   }
 
   getProfile() {
-    return this.http.get<User>('/api/auth/user').pipe(tap(
+    return this.http.get<User | null>('/api/auth/user').pipe(tap(
       user => this.user$$.next(user)
     ))
   }
