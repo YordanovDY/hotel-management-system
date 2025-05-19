@@ -3,7 +3,7 @@ import { DOMAINS } from "../constants"
 
 export default function emailValidatorFn(): ValidatorFn {
     const domainStr = DOMAINS.join('|');
-    const emailPattern = new RegExp(`^[a-z]{1}[a-z0-9\._]+[a-z0-9]{1}@(${domainStr})$`);
+    const emailPattern = new RegExp(`^[A-Za-z]{1}[A-Za-z0-9\._]+[A-Za-z0-9]{1}@(${domainStr})$`);
 
     return (control) => {
         const value = control.value;
