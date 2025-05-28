@@ -19,8 +19,18 @@ export const routes: Routes = [
             },
 
             {
-                path: 'rooms-management', loadComponent: () => import('./components/rooms/rooms.component')
-                    .then(c => c.RoomsComponent),
+                path: 'rooms-management',
+                children: [
+                    {
+                        path: '', loadComponent: () => import('./components/room/rooms/rooms.component')
+                            .then(c => c.RoomsComponent),
+                    },
+
+                    {
+                        path: 'create-room', loadComponent: () => import('./components/room/create-room/create-room.component')
+                            .then(c => c.CreateRoomComponent),
+                    },
+                ]
             }
         ]
     },

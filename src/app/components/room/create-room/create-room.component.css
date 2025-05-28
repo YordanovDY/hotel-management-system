@@ -1,0 +1,5 @@
+.create-room-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
