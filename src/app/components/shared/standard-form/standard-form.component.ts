@@ -8,6 +8,7 @@ import { StandardFormHandler } from './standard-form.types';
 import { Observable } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { SelectFieldComponent } from './select-field/select-field.component';
+import { CheckboxComponent } from "./checkbox/checkbox.component";
 
 @Component({
   selector: 'app-standard-form',
@@ -19,7 +20,8 @@ import { SelectFieldComponent } from './select-field/select-field.component';
     ReactiveFormsModule,
     SelectFieldComponent,
     AsyncPipe,
-  ],
+    CheckboxComponent
+],
   templateUrl: './standard-form.component.html',
   styleUrl: './standard-form.component.css'
 })
@@ -41,7 +43,9 @@ export class StandardFormComponent {
       return;
     }
 
-    this.handler(this.formModel.value);
+    console.log(this.formModel.value);
+    
+    // this.handler(this.formModel.value);
   }
 
 }

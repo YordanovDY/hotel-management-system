@@ -2,17 +2,22 @@
     <h3>{{title}}</h3>
 
     @for (field of formTemplate; track $index) {
-        @if(field.type === 'text'){
-            <app-text-field [label]="field.label" [name]="field.name" [formControlName]="field.formControlName" />
-        }
+    @if(field.type === 'text'){
+    <app-text-field [label]="field.label" [name]="field.name" [formControlName]="field.formControlName" />
+    }
 
-        @if(field.type === 'password'){
-            <app-pass-field [label]="field.label" [name]="field.name" [formControlName]="field.formControlName" />
-        }
+    @if(field.type === 'password'){
+    <app-pass-field [label]="field.label" [name]="field.name" [formControlName]="field.formControlName" />
+    }
 
-        @if(field.type === 'select'){
-            <app-select-field  [label]="field.label" [name]="field.name" [formControlName]="field.formControlName" [options]="field.options"/>
-        }
+    @if(field.type === 'select'){
+    <app-select-field [label]="field.label" [name]="field.name" [formControlName]="field.formControlName"
+        [options]="field.options" />
+    }
+
+    @if(field.type === 'checkbox'){
+    <app-checkbox [label]="field.label" [name]="field.name" [formControlName]="field.formControlName" />
+    }
     }
 
     <button [disabled]="isInvalid || (isPending | async)" mat-raised-button>{{btnLabel}}</button>

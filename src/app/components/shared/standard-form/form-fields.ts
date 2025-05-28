@@ -42,4 +42,12 @@ export class SelectField extends BaseField {
     }
 }
 
-export type FormFieldTemplate = TextField | PassField | SelectField;
+export class Checkbox extends BaseField {
+    type = 'checkbox';
+
+    constructor(label: string, name: string, formControlName: string) {
+        super(label, name, formControlName);
+    }
+}
+
+export type FormFieldTemplate = TextField | PassField | SelectField | Checkbox;
