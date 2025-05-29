@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
-import { BooleanIconComponent } from "../../shared/boolean-icon/boolean-icon.component";
 import { SpinnerComponent } from '../../shared/spinner/spinner.component';
 import { BehaviorSubject } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { RoomService } from '../room.service';
 import { getFloorUtil } from '../room.utils';
+import { RoomDetailsComponent } from './room-details/room-details.component';
 
 @Component({
   selector: 'app-rooms',
@@ -14,9 +14,9 @@ import { getFloorUtil } from '../room.utils';
   imports: [
     MatButtonModule,
     RouterLink,
-    BooleanIconComponent,
     SpinnerComponent,
     AsyncPipe,
+    RoomDetailsComponent,
   ],
   providers: [RoomService],
   templateUrl: './rooms.component.html',

@@ -9,7 +9,7 @@
         <h4 class="floor-header">Floor {{getFloor($index, lastFloor)}}</h4>
         <ul class="rooms-list">
             @for (room of floor; track $index) {
-                <li class="room">
+                <li class="room" (click)="showDetails()">
                     <span>{{room.roomNumber}}</span>
                     <span>{{room.type}}</span>
                 </li>
@@ -21,25 +21,9 @@
     <button routerLink="/dashboard/rooms-management/create-room" class="create-btn" mat-raised-button>
         Create Room
     </button>
+    @if(show){
+        <app-room-details (requestHide)="hideDetails()" />
+    }
     }
 
-    @if(show){
-    <div class="room-details">
-        <h5>Room Details</h5>
-        <ul>
-            <li>Room Number: 822</li>
-            <li>Type: Apartment</li>
-            <li>Exposure: East</li>
-            <li>Floor: 8</li>
-            <li>Beds Count: 4</li>
-            <li>Air Condition: <app-boolean-icon [value]="true" size="small" /></li>
-            <li>Price per Night: 79.59$</li>
-        </ul>
-        <div class="control-buttons">
-            <button mat-raised-button>Edit</button>
-            <button mat-raised-button>Delete</button>
-        </div>
-        <i (click)="hideDetails()" class="fa-solid fa-xmark x-mark"></i>
-    </div>
-    }
 </section>
