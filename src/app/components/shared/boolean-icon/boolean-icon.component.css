@@ -1,0 +1,23 @@
+.checkmark{
+    color: #008000;
+}
+
+.xmark{
+    color: #a20000;
+}
+
+.small {
+    font-size: 16px;
+}
+
+.medium{
+    font-size: 22px;
+}
+
+.large{
+    font-size: 28px;
+}
+
+.x-large{
+    font-size: 34px;
+}
