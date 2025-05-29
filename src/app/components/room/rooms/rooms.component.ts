@@ -23,14 +23,22 @@ import { RoomDetailsComponent } from './room-details/room-details.component';
   styleUrl: './rooms.component.css'
 })
 export class RoomsComponent implements OnInit {
+  private _floor: number = 0;
+
   private isRoomsPending$$ = new BehaviorSubject<boolean>(true);
   public isRoomsPending$ = this.isRoomsPending$$.asObservable();
 
+  private isDetailsPending$$ = new BehaviorSubject<boolean>(false);
+  public isDetailsPending$ = this.isDetailsPending$$.asObservable();
+
   isDetailsShown: boolean = false;
-  private _floor: number = 0;
 
   get rooms() {
     return this.roomService.rooms$;
+  }
+
+  get room(){
+    return this.roomService.roomDetails$;
   }
 
   get lastFloor() {
@@ -56,8 +64,13 @@ export class RoomsComponent implements OnInit {
     this.isDetailsShown = false;
   }
 
-  showDetails() {
+  showDetails(roomId: string) {
+    this.isDetailsPending$$.next(true);
     this.isDetailsShown = true;
+
+    this.roomService.getSingleRoom(roomId).subscribe(() => {
+      this.isDetailsPending$$.next(false);
+    })
   }
 
   get show(): boolean {

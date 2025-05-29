@@ -1,17 +1,21 @@
 <div class="room-details">
     <h5>Room Details</h5>
+    @if(isPending | async){
+    <app-spinner />
+    } @else {
     <ul>
-        <li>Room Number: 822</li>
-        <li>Type: Apartment</li>
-        <li>Exposure: East</li>
-        <li>Floor: 8</li>
-        <li>Beds Count: 4</li>
-        <li>Air Condition: <app-boolean-icon [value]="true" size="small" /></li>
-        <li>Price per Night: 79.59$</li>
+        <li>Room Number: {{room?.roomNumber}}</li>
+        <li>Type: {{room?.type}}</li>
+        <li>Exposure: {{room?.exposure}}</li>
+        <li>Floor: {{room?.floor}}</li>
+        <li>Beds Count: {{room?.bedsCount}}</li>
+        <li>Air Condition: <app-boolean-icon [value]="room?.hasAc || false" size="small" /></li>
+        <li>Price per Night: {{room?.pricePerNight?.toFixed(2)}}$</li>
     </ul>
     <div class="control-buttons">
         <button mat-raised-button>Edit</button>
         <button mat-raised-button>Delete</button>
     </div>
+    }
     <i (click)="hide()" class="fa-solid fa-xmark x-mark"></i>
 </div>
