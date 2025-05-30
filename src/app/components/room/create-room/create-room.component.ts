@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { StandardFormComponent } from '../../shared/standard-form/standard-form.component';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Checkbox, FormFieldTemplate, SelectField, TextField } from '../../shared/standard-form/form-fields';
+import roomNumberValidator from '../../../validators/roomN-validator';
 
 @Component({
   selector: 'app-create-room',
@@ -12,7 +13,7 @@ import { Checkbox, FormFieldTemplate, SelectField, TextField } from '../../share
 })
 export class CreateRoomComponent {
   formGroup = new FormGroup({
-    roomNumber: new FormControl('', [Validators.required]), // roomNumberValidator
+    roomNumber: new FormControl('', [Validators.required, roomNumberValidator()]),
     type: new FormControl('', [Validators.required]),
     exposure: new FormControl('', [Validators.required]),
     floor: new FormControl('', [Validators.required]), // positiveIntValidator

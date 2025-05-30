@@ -32,6 +32,9 @@
                 <mat-error>Invalid phone number.</mat-error>
             }
 
+            @if(ngControl?.hasError('roomNumberValidator')){
+                <mat-error>Invalid room number.</mat-error>
+            }
         </div>
     }
 </mat-form-field>
