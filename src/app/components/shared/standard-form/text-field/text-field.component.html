@@ -35,6 +35,11 @@
             @if(ngControl?.hasError('roomNumberValidator')){
                 <mat-error>Invalid room number.</mat-error>
             }
+
+            @if(ngControl?.hasError('positiveIntValidator')){
+                <mat-error>Must be a positive integer.</mat-error>
+            }
+
         </div>
     }
 </mat-form-field>
