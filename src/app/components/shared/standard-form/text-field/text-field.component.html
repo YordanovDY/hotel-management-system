@@ -40,6 +40,10 @@
                 <mat-error>Must be a positive integer.</mat-error>
             }
 
+            @if(ngControl?.hasError('priceValidator')){
+                <mat-error>Invalid price.</mat-error>
+            }
+
         </div>
     }
 </mat-form-field>
