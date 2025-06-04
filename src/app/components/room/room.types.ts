@@ -15,3 +15,13 @@ export interface Room {
     hasAc: boolean,
     pricePerNight: number
 }
+
+export interface RoomInput {
+    roomNumber: string,
+    type: string,
+    exposure: string,
+    floor: string,
+    bedsCount: string,
+    hasAc: boolean,
+    pricePerNight: string
+}

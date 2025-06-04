@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, tap } from 'rxjs';
-import { LiteRoom, Room } from './room.types';
+import { LiteRoom, Room, RoomInput } from './room.types';
 
 @Injectable()
 export class RoomService {
@@ -23,5 +23,16 @@ export class RoomService {
     return this.http.get<Room>(`/api/rooms/${roomId}`).pipe(tap(
       room => this.roomDetails$$.next(room)
     ))
+  }
+
+  createRoom(data: RoomInput) {
+    const newRoom = {
+      ...data,
+      floor: Number(data.floor),
+      bedsCount: Number(data.bedsCount),
+      pricePerNight: Number(data.pricePerNight)
+    };
+
+    return this.http.post<Room>('/api/rooms', newRoom);
   }
 }

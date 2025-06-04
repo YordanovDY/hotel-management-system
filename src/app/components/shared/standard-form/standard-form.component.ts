@@ -43,9 +43,7 @@ export class StandardFormComponent {
       return;
     }
 
-    console.log(this.formModel.value);
-    
-    // this.handler(this.formModel.value);
+    this.handler(this.formModel.value);
   }
 
 }
