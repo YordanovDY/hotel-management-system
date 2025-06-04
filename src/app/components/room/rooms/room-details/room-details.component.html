@@ -13,7 +13,7 @@
         <li>Price per Night: {{room?.pricePerNight?.toFixed(2)}}$</li>
     </ul>
     <div class="control-buttons">
-        <button mat-raised-button>Edit</button>
+        <button mat-raised-button [routerLink]="'/dashboard/rooms-management/edit-room/'+room?.id">Edit</button>
         <button mat-raised-button>Delete</button>
     </div>
     }

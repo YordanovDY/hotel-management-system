@@ -1,0 +1,16 @@
+<section class="edit-room-container">
+    @if(isRoomPending$ | async){
+        <app-spinner />
+
+    } @else {
+        <app-standard-form 
+        title="Edit Room"
+        btnLabel="Edit"
+        [formGroup]="formGroup"
+        [formTemplate]="formTemplate"
+        [handler]="editRoomHandler"
+        />
+    }
+    
+    <app-notification #notification />
+</section>

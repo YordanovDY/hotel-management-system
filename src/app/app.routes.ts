@@ -30,6 +30,11 @@ export const routes: Routes = [
                         path: 'create-room', loadComponent: () => import('./components/room/create-room/create-room.component')
                             .then(c => c.CreateRoomComponent),
                     },
+
+                    {
+                        path: 'edit-room/:roomId', loadComponent: () => import('./components/room/edit-room/edit-room.component')
+                            .then(c => c.EditRoomComponent),
+                    },
                 ]
             }
         ]

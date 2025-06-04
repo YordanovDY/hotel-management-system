@@ -5,11 +5,12 @@ import { Room } from '../../room.types';
 import { Observable } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { SpinnerComponent } from '../../../shared/spinner/spinner.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-room-details',
   standalone: true,
-  imports: [BooleanIconComponent, MatButtonModule, SpinnerComponent, AsyncPipe],
+  imports: [BooleanIconComponent, MatButtonModule, SpinnerComponent, AsyncPipe, RouterLink],
   templateUrl: './room-details.component.html',
   styleUrl: './room-details.component.css'
 })
