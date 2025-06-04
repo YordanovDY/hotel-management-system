@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { StandardFormComponent } from '../../shared/standard-form/standard-form.component';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Checkbox, FormFieldTemplate, SelectField, TextField } from '../../shared/standard-form/form-fields';
@@ -9,16 +9,19 @@ import { RoomService } from '../room.service';
 import { RoomInput } from '../room.types';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
+import { NotificationComponent } from '../../shared/notification/notification.component';
 
 @Component({
   selector: 'app-create-room',
   standalone: true,
-  imports: [StandardFormComponent],
+  imports: [StandardFormComponent, NotificationComponent],
   providers: [RoomService],
   templateUrl: './create-room.component.html',
   styleUrl: './create-room.component.css'
 })
 export class CreateRoomComponent {
+  @ViewChild('notification') notification !: NotificationComponent;
+
   private isPending$$ = new BehaviorSubject<boolean>(false);
   public isPending$ = this.isPending$$.asObservable();
 
@@ -42,7 +45,7 @@ export class CreateRoomComponent {
 
       return this.roomService.createRoom(input).subscribe({
         next: (room) => {
-          console.log(`${room.roomNumber} has been successfully created.`); // TODO: Show notification
+          this.notification.showNotification({ type: 'success', message: `${room.roomNumber} has been successfully created.` })
           this.isPending$$.next(false);
         },
 
@@ -50,10 +53,11 @@ export class CreateRoomComponent {
           this.isPending$$.next(false);
 
           if (err instanceof HttpErrorResponse) {
-            console.error(err.error.message);
+            this.notification.showNotification({ type: 'error', message: err.error.message });
             return;
           }
-          console.error('Ops, something went wrong!');
+
+          this.notification.showNotification({ type: 'error', message: 'Ops, something went wrong!' });
         },
 
         complete: () => {
