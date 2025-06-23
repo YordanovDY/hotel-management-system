@@ -14,8 +14,9 @@
     </ul>
     <div class="control-buttons">
         <button mat-raised-button [routerLink]="'/dashboard/rooms-management/edit-room/'+room?.id">Edit</button>
-        <button mat-raised-button>Delete</button>
+        <button (click)="showDeleteConfirmation()" mat-raised-button>Delete</button>
     </div>
     }
     <i (click)="hide()" class="fa-solid fa-xmark x-mark"></i>
+    <!-- <app-confirmation /> -->
 </div>
