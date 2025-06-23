@@ -35,4 +35,15 @@ export class RoomService {
 
     return this.http.post<Room>('/api/rooms', newRoom);
   }
+
+  editRoom(roomId: string, data: RoomInput) {
+    const updatedRoom = {
+      ...data,
+      floor: Number(data.floor),
+      bedsCount: Number(data.bedsCount),
+      pricePerNight: Number(data.pricePerNight)
+    };
+
+    return this.http.put(`/api/rooms/${roomId}`, updatedRoom);
+  }
 }

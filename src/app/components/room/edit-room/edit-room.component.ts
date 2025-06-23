@@ -39,6 +39,7 @@ export class EditRoomComponent implements OnInit {
     this.roomService.getSingleRoom(roomId).subscribe({
       next: (room) => {
         this.formGroup.patchValue({
+          roomId: room.id,
           roomNumber: room.roomNumber,
           type: room.type,
           exposure: room.exposure,
@@ -69,6 +70,7 @@ export class EditRoomComponent implements OnInit {
   }
 
   formGroup = new FormGroup({
+    roomId: new FormControl(''),
     roomNumber: new FormControl('', [Validators.required, roomNumberValidator()]),
     type: new FormControl('', [Validators.required]),
     exposure: new FormControl('', [Validators.required]),
