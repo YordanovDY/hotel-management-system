@@ -17,6 +17,7 @@ export interface Room {
 }
 
 export interface RoomInput {
+    roomId?: string,
     roomNumber: string,
     type: string,
     exposure: string,

@@ -9,9 +9,10 @@ import priceValidator from '../../../validators/price-validator';
 import { Checkbox, FormFieldTemplate, SelectField, TextField } from '../../shared/standard-form/form-fields';
 import { RoomInput } from '../room.types';
 import { BehaviorSubject, Subscription } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AsyncPipe } from '@angular/common';
 import { SpinnerComponent } from '../../shared/spinner/spinner.component';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-edit-room',
@@ -63,9 +64,44 @@ export class EditRoomComponent implements OnInit {
     })
   }
 
-  constructor(private roomService: RoomService, private route: ActivatedRoute) {
+  constructor(
+    private roomService: RoomService,
+    private route: ActivatedRoute,
+    private router: Router,
+  ) {
     this.editRoomHandler = (input: RoomInput) => {
-      console.log(input);
+      
+      if (!input.roomId) {
+        this.notification.showNotification({
+          type: 'error',
+          message: 'Something went wrong. Please try again!'
+        })
+        return;
+      }
+
+      this.isUpdatePending$$.next(true);
+
+      return roomService.editRoom(input.roomId, input).subscribe({
+        next: () => {
+          this.router.navigate(['/dashboard/rooms-management']);
+          this.isUpdatePending$$.next(false);
+        },
+
+        error: (err) => {
+          this.isUpdatePending$$.next(false);
+
+          if (err instanceof HttpErrorResponse) {
+            this.notification.showNotification({ type: 'error', message: err.error.message });
+            return;
+          }
+
+          this.notification.showNotification({ type: 'error', message: 'Ops, something went wrong!' });
+        },
+
+        complete: () =>{
+          this.isUpdatePending$$.next(false);
+        }
+      })
     }
   }
 
