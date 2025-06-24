@@ -47,3 +47,7 @@
 .create-btn {
     align-self: center;
 }
+
+.pending-deletion {
+    background-color: #f0f0f050;
+}

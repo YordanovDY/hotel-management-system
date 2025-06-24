@@ -36,8 +36,6 @@ export class RoomsComponent implements OnInit {
   private isDetailsPending$$ = new BehaviorSubject<boolean>(false);
   public isDetailsPending$ = this.isDetailsPending$$.asObservable();
 
-  private isDeletionPending$$ = new BehaviorSubject<boolean>(false);
-  private isDeletionPending$ = this.isDeletionPending$$.asObservable();
   @ViewChild('notification') notification!: NotificationComponent;
 
   isDetailsShown: boolean = false;
@@ -67,6 +65,12 @@ export class RoomsComponent implements OnInit {
     })
   }
 
+  deletionQueue = new Set<string>();
+
+  isDeletionPending(roomId: string): boolean {
+    return this.deletionQueue.has(roomId);
+  }
+
   getFloor = getFloorUtil;
 
   hideDetails() {
@@ -86,56 +90,56 @@ export class RoomsComponent implements OnInit {
     return this.isDetailsShown;
   }
 
-   getDeletionData(delRoom: Room): ConfirmationDialog {
+  getDeletionData(delRoom: Room): ConfirmationDialog {
     return {
       title: 'Do you want to delete this room?',
       content: `Room ${delRoom.roomNumber} will be removed...`,
       confirmationBtnName: 'Delete',
       handler: () => {
-        this.isDeletionPending$$.next(true);
         this.isDetailsShown = false;
-  
+        this.deletionQueue.add(delRoom.id);
+
         if (delRoom === null || !delRoom.id) {
           this.notification.showNotification({
             type: 'error',
             message: 'Something went wrong. Please try again!'
           });
-  
+
           return;
         }
-  
+
         const roomId = delRoom.id;
         const roomNumber = delRoom.roomNumber;
-  
+
         this.roomService.deleteRoom(roomId).subscribe({
           next: () => {
-            
+
 
             this.notification.showNotification({
               type: 'success',
               message: `Room ${roomNumber} has been deleted.`
             })
-  
-            this.isDeletionPending$$.next(false);
+
+            this.deletionQueue.delete(delRoom.id);
           },
-  
+
           error: (err) => {
             let message: string = 'Something went wrong. Please try again!';
-  
+
             if (err instanceof HttpErrorResponse) {
               message = err.error.message;
             }
-  
+
             this.notification.showNotification({
               type: 'error',
               message
             })
-  
-            this.isDeletionPending$$.next(false);
+
+            this.deletionQueue.delete(delRoom.id);
           },
-  
+
           complete: () => {
-            this.isDeletionPending$$.next(false);
+            this.deletionQueue.delete(delRoom.id);
           }
         })
       }

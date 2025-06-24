@@ -9,10 +9,13 @@
         <h4 class="floor-header">Floor {{getFloor($index, lastFloor)}}</h4>
         <ul class="rooms-list">
             @for (room of floor; track $index) {
-                <li class="room" (click)="showDetails(room.id)">
-                    <span>{{room.roomNumber}}</span>
-                    <span>{{room.type}}</span>
-                </li>
+            <li [class]="{
+                    'room':true,
+                    'pending-deletion': isDeletionPending(room.id)
+                    }" (click)="showDetails(room.id)">
+                <span>{{room.roomNumber}}</span>
+                <span>{{room.type}}</span>
+            </li>
             }
         </ul>
     </div>
@@ -22,12 +25,8 @@
         Create Room
     </button>
     @if(show){
-        <app-room-details 
-        [isPending]="isDetailsPending$" 
-        [room]="(room | async)" 
-        (requestHide)="hideDetails()" 
-        [getDeletionData]="getDeletionData.bind(this)"
-        />
+    <app-room-details [isPending]="isDetailsPending$" [room]="(room | async)" (requestHide)="hideDetails()"
+        [getDeletionData]="getDeletionData.bind(this)" />
     }
     }
 
