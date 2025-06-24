@@ -49,6 +49,18 @@ export class RoomService {
 
 
   deleteRoom(roomId: string) {
-    return this.http.delete(`/api/rooms/${roomId}`);
+    return this.http.delete<Room>(`/api/rooms/${roomId}`).pipe(tap(
+      room => {
+        const rooms = this.rooms$$.getValue();
+
+        if (rooms) {
+          const updatedRooms = rooms.map(floors => {
+            return floors.filter(r => r.id !== room.id);
+          });
+          this.rooms$$.next(updatedRooms);
+        }
+
+      }
+    ))
   }
 }

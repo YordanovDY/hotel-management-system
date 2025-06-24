@@ -22,8 +22,14 @@
         Create Room
     </button>
     @if(show){
-        <app-room-details [isPending]="isDetailsPending$" [room]="(room | async)" (requestHide)="hideDetails()" />
+        <app-room-details 
+        [isPending]="isDetailsPending$" 
+        [room]="(room | async)" 
+        (requestHide)="hideDetails()" 
+        [getDeletionData]="getDeletionData.bind(this)"
+        />
     }
     }
 
+    <app-notification #notification />
 </section>
