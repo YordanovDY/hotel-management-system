@@ -46,4 +46,9 @@ export class RoomService {
 
     return this.http.put(`/api/rooms/${roomId}`, updatedRoom);
   }
+
+
+  deleteRoom(roomId: string) {
+    return this.http.delete(`/api/rooms/${roomId}`);
+  }
 }
